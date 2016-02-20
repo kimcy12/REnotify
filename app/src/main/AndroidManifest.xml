@@ -19,15 +19,22 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".Widget">
+        <receiver android:name=".IncomingSms" >
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_info" />
         </receiver>
+
     </application>
+
+
+    <uses-permission android:name="android.permission.RECEIVE_SMS" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.READ_SMS" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.SEND_SMS" >
+    </uses-permission>/>
+
+
 
 </manifest>
