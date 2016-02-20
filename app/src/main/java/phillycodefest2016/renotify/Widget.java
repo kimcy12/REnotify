@@ -1,9 +1,12 @@
 package phillycodefest2016.renotify;
 
+
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.widget.RemoteViews;
+import android.widget.TextView;
+
 
 /**
  * Implementation of App Widget functionality.
@@ -12,6 +15,7 @@ public class Widget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
+
 
         CharSequence widgetText = context.getString(R.string.appwidget_text);
         // Construct the RemoteViews object
@@ -38,6 +42,15 @@ public class Widget extends AppWidgetProvider {
     @Override
     public void onDisabled(Context context) {
         // Enter relevant functionality for when the last widget is disabled
+    }
+
+    public class WidgetView {
+
+        public WidgetView(){
+
+            TextView title = 
+        }
+
     }
 }
 

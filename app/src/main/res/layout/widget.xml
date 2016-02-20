@@ -3,8 +3,7 @@
     android:layout_height="wrap_content"
     android:background="#09C"
     android:padding="@dimen/widget_margin"
-    android:accessibilityLiveRegion="none"
-    android:id="@+id/Title">
+    android:accessibilityLiveRegion="none">
 
     <TextView
         android:layout_width="wrap_content"
@@ -46,7 +45,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:id="@+id/textView3"
+        android:id="@+id/Title"
         android:layout_above="@+id/Sender"
         android:layout_centerHorizontal="true" />
 
