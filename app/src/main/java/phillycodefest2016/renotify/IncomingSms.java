@@ -56,12 +56,10 @@ public class IncomingSms extends BroadcastReceiver {
                     PendingIntent piReply = PendingIntent.getActivity(context, 1, smsIntent, 0);
 
 
-                    Intent snoozeIntent = new Intent(context, SnoozeClass.class);
+                    Intent snoozeIntent = new Intent(context, BuildUi.class);
                     snoozeIntent.putExtra("passing data", senderNum);
                     snoozeIntent.putExtra("passing second data", message);
                     PendingIntent piSnooze = PendingIntent.getActivity(context, 0, snoozeIntent, 0);
-
-
 
 
                     NotificationCompat.Builder mBuilder =

@@ -36,9 +36,8 @@ public class BuildUi extends ActionBarActivity{
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        final BuildUi BUildUi = this;
 
-
+        final BuildUi activity = this;
 
         Button btnSnooze = (Button) findViewById(R.id.buttonSnooze);
         btnSnooze.setOnClickListener(new View.OnClickListener() {
@@ -58,8 +57,6 @@ public class BuildUi extends ActionBarActivity{
 
                 // Create our intent and assign it the needed information
                 Intent intent = new Intent(SnoozeClass.ACTION);
-                intent.putExtra("passing data", senderAddress);
-                intent.putExtra("passing second data", message);
 
 
                 PendingIntent pendingIntent =
@@ -73,8 +70,7 @@ public class BuildUi extends ActionBarActivity{
 
                 alarmManager.set(AlarmManager.RTC_WAKEUP, milliseconds, pendingIntent);
                 Log.w("btnSnooze", "alarm created");
-                BUildUi.finish();
-
+                activity.finish();
             }
         });
 
