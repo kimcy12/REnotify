@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.telephony.gsm.SmsManager;
@@ -51,22 +52,26 @@ public class IncomingSms extends BroadcastReceiver {
 
                     Intent smsIntent = new Intent(Intent.ACTION_VIEW);
                     smsIntent.setType("vnd.android-dir/mms-sms");
-                    smsIntent.putExtra("address", senderNum);
+                    smsIntent.setData(Uri.parse("sms:" + senderNum));
                     PendingIntent piReply = PendingIntent.getActivity(context, 1, smsIntent, 0);
 
 
-                    Intent snoozeIntent = new Intent(context, MainActivity.class);
+                    Intent snoozeIntent = new Intent(context, SnoozeClass.class);
+                    snoozeIntent.putExtra("passing data", senderNum);
+                    snoozeIntent.putExtra("passing second data", message);
                     PendingIntent piSnooze = PendingIntent.getActivity(context, 0, snoozeIntent, 0);
+
+
 
 
                     NotificationCompat.Builder mBuilder =
                             new NotificationCompat.Builder(context)
-                                    .setSmallIcon(android.R.drawable.ic_menu_add)
+                                    .setSmallIcon(android.R.drawable.ic_popup_reminder)
                                     .setContentTitle(senderNum)
                                     .setContentText(message)
                                     .addAction(android.R.drawable.ic_media_play,
                                             "Reply", piReply)
-                                    .addAction(android.R.drawable.ic_popup_reminder,
+                                    .addAction(android.R.drawable.ic_lock_idle_alarm,
                                             "Snooze", piSnooze);
                     ;
 
