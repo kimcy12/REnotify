@@ -3,6 +3,7 @@ package phillycodefest2016.renotify;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -11,18 +12,27 @@ import android.view.ViewGroup;
 
 public class MainActivity extends ActionBarActivity {
 
+    private String ACTION_TAG = "android.appwidget.action.NOTIF_UPDATE";
+    public static String KEY_TAG = "keytag";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i("SmsReceiver", "senderNum: ");
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container, new PlaceholderFragment(), ACTION_TAG)
                     .commit();
         }
+
+
+
+
 
     }
 
@@ -55,6 +65,7 @@ public class MainActivity extends ActionBarActivity {
             return rootView;
         }
     }
+
 
 
 }
