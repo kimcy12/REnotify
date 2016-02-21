@@ -12,13 +12,12 @@ import android.telephony.gsm.SmsMessage;
 import android.util.Log;
 import android.widget.Toast;
 
-public class IncomingSms extends BroadcastReceiver
-{
+public class IncomingSms extends BroadcastReceiver {
     // Get the object of SmsManager
     final SmsManager sms = SmsManager.getDefault();
     private String senderNum;
     private String message;
-
+    private final String PACKAGE_NAME = "phillycodefest2016.renotify";
 
 
     public void onReceive(Context context, Intent intent) {
@@ -49,13 +48,15 @@ public class IncomingSms extends BroadcastReceiver
                             "senderNum: " + senderNum + ", message: " + message, duration);
                     toast.show();
 
-                    Intent replyIntent = new Intent(context, MainActivity.class);
-                    replyIntent.setAction(MainActivity.ACTION_DISMISS);
-                    PendingIntent piReply = PendingIntent.getService(context, 0, replyIntent, 0);
+
+                    Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+                    smsIntent.setType("vnd.android-dir/mms-sms");
+                    smsIntent.putExtra("address", senderNum);
+                    PendingIntent piReply = PendingIntent.getActivity(context, 1, smsIntent, 0);
+
 
                     Intent snoozeIntent = new Intent(context, MainActivity.class);
-                    snoozeIntent.setAction(MainActivity.ACTION_SNOOZE);
-                    PendingIntent piSnooze = PendingIntent.getService(context, 0, snoozeIntent, 0);
+                    PendingIntent piSnooze = PendingIntent.getActivity(context, 0, snoozeIntent, 0);
 
 
                     NotificationCompat.Builder mBuilder =
@@ -63,24 +64,26 @@ public class IncomingSms extends BroadcastReceiver
                                     .setSmallIcon(android.R.drawable.ic_menu_add)
                                     .setContentTitle(senderNum)
                                     .setContentText(message)
-                                    .addAction (android.R.drawable.ic_media_play,
+                                    .addAction(android.R.drawable.ic_media_play,
                                             "Reply", piReply)
-                                    .addAction (android.R.drawable.ic_popup_reminder,
-                                            "Snooze", piSnooze);;
-
-
+                                    .addAction(android.R.drawable.ic_popup_reminder,
+                                            "Snooze", piSnooze);
+                    ;
 
 
                     int mNotificationId = 001;
                     NotificationManager mNotify = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
                     mNotify.notify(mNotificationId, mBuilder.build());
+
+
                 } // end for loop
             } // bundle is null
 
         } catch (Exception e) {
-            Log.e("SmsReceiver", "Exception smsReceiver" +e);
+            Log.e("SmsReceiver", "Exception smsReceiver" + e);
 
         }
     }
+
 
 }

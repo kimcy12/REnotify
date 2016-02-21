@@ -9,13 +9,19 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 public class MainActivity extends ActionBarActivity {
+
+    private Spinner spinner;
 
     private String ACTION_TAG = "android.appwidget.action.NOTIF_UPDATE";
     public static String KEY_TAG = "keytag";
     final static String ACTION_DISMISS = "Dismiss";
     final static String ACTION_SNOOZE = "Snooze";
+    String[] test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +31,31 @@ public class MainActivity extends ActionBarActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        test = new String[] {"1", "2", "3", "4"};
+
+        spinner = (Spinner)findViewById(R.id.static_spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
+                android.R.layout.simple_spinner_item, test);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                Log.v("item", (String) parent.getItemAtPosition(position));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+            }
+        });
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment(), ACTION_TAG)
                     .commit();
         }
-
-
 
 
 
