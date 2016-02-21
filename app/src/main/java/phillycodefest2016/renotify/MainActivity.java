@@ -14,12 +14,13 @@ public class MainActivity extends ActionBarActivity {
 
     private String ACTION_TAG = "android.appwidget.action.NOTIF_UPDATE";
     public static String KEY_TAG = "keytag";
-
+    final static String ACTION_DISMISS = "Dismiss";
+    final static String ACTION_SNOOZE = "Snooze";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("SmsReceiver", "senderNum: ");
+        Log.i("SmsReceiver", "senderNum");
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
